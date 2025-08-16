@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 
   return {
     props: { posts: serializedPosts },
-    revalidate: 60
+    revalidate: 1
   };
 }
 
