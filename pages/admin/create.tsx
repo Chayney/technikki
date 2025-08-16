@@ -20,7 +20,7 @@ export default function CreatePost() {
             headers: { "Content-Type": "application/json" },
         });
 
-        router.push("/").then(() => window.location.reload());
+        router.push("/");
     };
 
     return (

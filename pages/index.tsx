@@ -2,6 +2,7 @@ import { PostWithAuthor, SerializedPostWithAuthor } from "../types/post";
 import { PrismaClient } from "../prisma/generated/prisma";
 import { GetStaticProps } from "next";
 import { useSession, signOut } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 type Props = {
   posts: SerializedPostWithAuthor[];
@@ -27,8 +28,17 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   };
 }
 
-export default function Home({ posts }: Props) {
+export default function Home({ posts: initialPosts }: Props) {
   const { data: session } = useSession();
+  const [posts, setPosts] = useState<SerializedPostWithAuthor[]>(initialPosts);
+
+  useEffect(() => {
+    fetch("/api/posts")
+      .then(res => res.json())
+      .then(data => setPosts(data))
+      .catch(err => console.error("投稿取得失敗", err));
+  }, []);
+
   return (
     <div>
       <h1>ブログ</h1>
