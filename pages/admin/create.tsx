@@ -7,7 +7,7 @@ export default function CreatePost() {
     const router = useRouter();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    console.log(session);
+
     if (!session) return <p>ログインが必要です</p>;
     if (!session.user.isAdmin) return <p>管理者のみアクセス可能</p>;
 
