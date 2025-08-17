@@ -3,6 +3,7 @@ import { PrismaClient } from "../prisma/generated/prisma";
 import { GetStaticProps } from "next";
 import { useSession, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 type Props = {
   posts: SerializedPostWithAuthor[];
@@ -49,6 +50,16 @@ export default function Home({ posts: initialPosts }: Props) {
       )}
       {posts.map(post => (
         <div key={post.id}>
+          {post.image && (
+            <div>
+              <Image
+                src={post.image}
+                alt={`画像: ${post.title}`}
+                style={{ maxWidth: "300px", height: "auto", marginTop: "10px" }}
+                unoptimized
+              />
+            </div>
+          )}
           <a href={`/post/${post.id}`}>
             <h2>{post.title}</h2>
           </a>

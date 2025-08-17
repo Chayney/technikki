@@ -4,6 +4,7 @@ import { ParsedUrlQuery } from "querystring";
 import { SerializedPostWithAuthor } from "../../types/post";
 import { useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
+import Image from "next/image";
 
 const prisma = new PrismaClient();
 
@@ -69,6 +70,16 @@ export default function Post({ post }: Props) {
     return (
         <div>
             <h1>{post.title}</h1>
+            {post.image && (
+                <div>
+                    <Image
+                        src={post.image}
+                        alt={`画像: ${post.title}`}
+                        style={{ maxWidth: "600px", height: "auto", marginBottom: "1em" }}
+                        unoptimized
+                    />
+                </div>
+            )}
             <div>{post.content}</div>
             <small>作成日: {formattedDate}</small>
             {session && (
