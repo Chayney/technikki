@@ -4,6 +4,7 @@ import { GetStaticProps } from "next";
 import { useSession, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import styles from '../styles/Content.module.css';
 
 type Props = {
   posts: SerializedPostWithAuthor[];
@@ -48,23 +49,29 @@ export default function Home({ posts: initialPosts }: Props) {
           ログアウト
         </button>
       )}
-      {posts.map(post => (
-        <div key={post.id}>
-          {post.image && (
-            <div>
-              <Image
-                src={post.image}
-                alt={`画像: ${post.title}`}
-                style={{ maxWidth: "300px", height: "auto", marginTop: "10px" }}
-                unoptimized
-              />
+      <div className={styles.parentContainer}>
+        {posts.map(post => (
+          <div key={post.id} className={styles.childContainer}>
+            {post.image && (
+              <div className={styles.imageContainer}>
+                <Image
+                  src={post.image}
+                  alt={`画像: ${post.title}`}
+                  fill
+                  className={styles.contentImage}
+                  unoptimized
+                  priority
+                />
+              </div>
+            )}
+            <div className={styles.titleContainer}>
+              <a href={`/post/${post.id}`} className={styles.contentTitle}>
+                <span>{post.title}</span>
+              </a>
             </div>
-          )}
-          <a href={`/post/${post.id}`}>
-            <h2>{post.title}</h2>
-          </a>
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

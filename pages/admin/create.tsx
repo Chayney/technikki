@@ -109,8 +109,11 @@ export default function CreatePost() {
                         <Image
                             src={previewUrl}
                             alt="選択した画像"
-                            style={{ maxWidth: "300px", height: "auto" }}
+                            width={800}
+                            height={600}
+                            style={{ maxWidth: "600px", height: "auto" }}
                             unoptimized
+                            priority
                         />
                     </div>
                 )}

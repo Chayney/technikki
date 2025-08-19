@@ -75,8 +75,11 @@ export default function Post({ post }: Props) {
                     <Image
                         src={post.image}
                         alt={`画像: ${post.title}`}
+                        width={800}
+                        height={600}
                         style={{ maxWidth: "600px", height: "auto", marginBottom: "1em" }}
                         unoptimized
+                        priority
                     />
                 </div>
             )}
