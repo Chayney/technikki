@@ -1,3 +1,45 @@
-.logo {
-    padding: 16px;
+.header {
+    top: 0;
+    left: 0;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    position: fixed;
+    background: #ffd5ec;
+}
+
+.logo>* {
+    text-decoration: none;
+    cursor: pointer;
+    color: #3366ff;
+}
+
+.nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav>* {
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.nav>*:hover,
+.logo>*:hover {
+    opacity: 0.7;
+}
+
+.mainTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.subTitle {
+    font-size: 1rem;
 }
