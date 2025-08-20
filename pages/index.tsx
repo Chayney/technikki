@@ -5,7 +5,7 @@ import { useSession, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from '../styles/Content.module.css';
-import Header from "../components/organisms/Header";
+import { Header } from "../components/organisms/Header";
 
 type Props = {
   posts: SerializedPostWithAuthor[];

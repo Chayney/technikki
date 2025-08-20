@@ -5,6 +5,8 @@ import { SerializedPostWithAuthor } from "../../types/post";
 import { useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
+import { Header } from "../../components/organisms/Header";
+import styles from '../../styles/Post.module.css';
 
 const prisma = new PrismaClient();
 
@@ -64,32 +66,38 @@ export default function Post({ post }: Props) {
     const [formattedDate, setFormattedDate] = useState("");
 
     useEffect(() => {
-        setFormattedDate(new Date(post.createdAt).toLocaleString());
+        setFormattedDate(new Date(post.createdAt).toLocaleDateString());
     }, [post.createdAt]);
 
     return (
         <div>
-            <h1>{post.title}</h1>
-            {post.image && (
-                <div>
-                    <Image
-                        src={post.image}
-                        alt={`画像: ${post.title}`}
-                        width={800}
-                        height={600}
-                        style={{ maxWidth: "600px", height: "auto", marginBottom: "1em" }}
-                        unoptimized
-                        priority
-                    />
+            <Header />
+            <div className={styles.parentContainer}>
+                <div className={styles.childContainer}>
+                    {post.image && (
+                        <div className={styles.imageContainer}>
+                            <Image
+                                src={post.image}
+                                alt={`画像: ${post.title}`}
+                                fill
+                                className={styles.contentImage}
+                                unoptimized
+                                priority
+                            />
+                        </div>
+                    )}
+                    <div className={styles.textContainer}>
+                        <h1>{post.title}</h1>
+                        <small>作成日: {formattedDate}</small>
+                        <div>{post.content}</div>
+                    </div>
+                    {session && (
+                        <button onClick={() => signOut({ callbackUrl: "/" })}>
+                            ログアウト
+                        </button>
+                    )}
                 </div>
-            )}
-            <div>{post.content}</div>
-            <small>作成日: {formattedDate}</small>
-            {session && (
-                <button onClick={() => signOut({ callbackUrl: "/" })}>
-                    ログアウト
-                </button>
-            )}
+            </div>
         </div>
     );
 }
