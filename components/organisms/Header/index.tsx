@@ -1,12 +1,10 @@
 import { Logout } from '../../atoms/Link/logout';
-import { Home } from '../../atoms/Link/home';
-import { Profile } from '../../atoms/Link/profile';
-import { About } from '../../atoms/Link/about';
 import { Logo } from '../../atoms/Logo/index';
 import { useSession } from "next-auth/react";
 import styles from './style.module.css';
+import { Menu } from '../../../components/molecules/menu';
 
-export default function Header() {
+export const Header = () => {
     const { data: session } = useSession();
     return (
         <header className={styles.header}>
@@ -22,9 +20,7 @@ export default function Header() {
                 />
             </div>
             <div className={styles.nav}>
-                <Home label="ホーム" />
-                <About label="このブログについて" />
-                <Profile label="プロフィール" />
+                <Menu />
                 {session && (
                     <Logout label="ログアウト" />
                 )}
