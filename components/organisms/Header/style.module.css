@@ -22,14 +22,6 @@
     align-items: center;
 }
 
-.nav>* {
-    font-size: 1rem;
-    color: #333;
-    text-decoration: none;
-    cursor: pointer;
-    transition: opacity 0.2s ease-in-out;
-}
-
 .nav>*:hover,
 .logo>*:hover {
     opacity: 0.7;
