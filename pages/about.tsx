@@ -1,5 +1,5 @@
 import { useSession, signOut } from "next-auth/react";
-import { Header } from "../components/organisms/Header";
+import { Header } from "../shared/header/components/header";
 
 export default function About() {
     const { data: session } = useSession();

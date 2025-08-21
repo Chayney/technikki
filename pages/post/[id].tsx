@@ -7,6 +7,7 @@ import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { Header } from "../../components/organisms/Header";
 import styles from '../../styles/Post.module.css';
+import { Sections } from "../../components/molecules/sections";
 
 const prisma = new PrismaClient();
 
@@ -17,6 +18,13 @@ interface Params extends ParsedUrlQuery {
 type Props = {
     post: SerializedPostWithAuthor;
 };
+
+const sections = [
+    { label: 'はじめに', targetId: 'introduction' },
+    { label: '使い方', targetId: 'usage' },
+    { label: 'メリット・デメリット', targetId: 'pros-cons' },
+    { label: 'まとめ', targetId: 'summary' },
+];
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
     const posts = await prisma.post.findMany({
@@ -90,6 +98,18 @@ export default function Post({ post }: Props) {
                         <h1>{post.title}</h1>
                         <small>作成日: {formattedDate}</small>
                         <div>{post.content}</div>
+                    </div>
+                    <div style={{ display: 'flex' }}>
+                        {/* 目次サイドバー */}
+                        <aside style={{ width: '200px', paddingRight: '2rem' }}>
+                            <Sections items={sections} />
+                        </aside>
+                        <main>
+                            <section id="introduction"><h2>はじめに</h2></section>
+                            <section id="usage"><h2>使い方</h2></section>
+                            <section id="pros-cons"><h2>メリット・デメリット</h2></section>
+                            <section id="summary"><h2>まとめ</h2></section>
+                        </main>
                     </div>
                     {session && (
                         <button onClick={() => signOut({ callbackUrl: "/" })}>

@@ -1,11 +1,10 @@
 import { PostWithAuthor, SerializedPostWithAuthor } from "../types/post";
 import { PrismaClient } from "../prisma/generated/prisma";
 import { GetStaticProps } from "next";
-import { useSession, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from '../styles/Content.module.css';
-import { Header } from "../components/organisms/Header";
+import { Header } from "../shared/header/components/header";
 
 type Props = {
   posts: SerializedPostWithAuthor[];
@@ -32,7 +31,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 }
 
 export default function Home({ posts: initialPosts }: Props) {
-  const { data: session } = useSession();
   const [posts, setPosts] = useState<SerializedPostWithAuthor[]>(initialPosts);
 
   useEffect(() => {
@@ -45,11 +43,6 @@ export default function Home({ posts: initialPosts }: Props) {
   return (
     <div>
       <Header />
-      {session && (
-        <button onClick={() => signOut({ callbackUrl: "/" })}>
-          ログアウト
-        </button>
-      )}
       <div className={styles.parentContainer}>
         {posts.map(post => (
           <div key={post.id} className={styles.childContainer}>
