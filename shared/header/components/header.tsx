@@ -1,11 +1,18 @@
-import { Logout } from '../../atoms/Link/logout';
-import { Logo } from '../../atoms/Logo/index';
-import { useSession } from "next-auth/react";
-import styles from './style.module.css';
-import { Menu } from '../../../components/molecules/menu';
+import { Menu } from './menu';
+import { Logo } from './logo';
+import { Logout } from './logout';
+import { useHeader } from '../hooks/useHeader';
+import styles from '../styles/header.module.css';
 
 export const Header = () => {
-    const { data: session } = useSession();
+    const { isLoggedIn } = useHeader();
+
+    const menuItems = [
+        { label: 'ホーム', href: '/' },
+        { label: 'このブログについて', href: '/about' },
+        { label: 'プロフィール', href: '/profile' },
+    ];
+
     return (
         <header className={styles.header}>
             <div className={styles.logo}>
@@ -20,11 +27,9 @@ export const Header = () => {
                 />
             </div>
             <div className={styles.nav}>
-                <Menu />
-                {session && (
-                    <Logout label="ログアウト" />
-                )}
+                <Menu items={menuItems} />
+                {isLoggedIn && <Logout label="ログアウト" />}
             </div>
         </header>
     );
-}
+};

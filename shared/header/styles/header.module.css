@@ -10,21 +10,10 @@
     background: #ffd5ec;
 }
 
-.logo>* {
-    text-decoration: none;
-    cursor: pointer;
-    color: #3366ff;
-}
-
 .nav {
     display: flex;
     gap: 1.5rem;
     align-items: center;
-}
-
-.nav>*:hover,
-.logo>*:hover {
-    opacity: 0.7;
 }
 
 .mainTitle {
