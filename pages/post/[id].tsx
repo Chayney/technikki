@@ -5,7 +5,7 @@ import { SerializedPostWithAuthor } from "../../types/post";
 import { useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
-import { Header } from "../../components/organisms/Header";
+import { Header } from "../../shared/header/components/header";
 import styles from '../../styles/Post.module.css';
 import { Sections } from "../../components/molecules/sections";
 
