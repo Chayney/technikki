@@ -3,11 +3,9 @@ import { PrismaClient } from "../../prisma/generated/prisma";
 import { ParsedUrlQuery } from "querystring";
 import { SerializedPostWithAuthor } from "../../types/post";
 import { useEffect, useState } from "react";
-import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { Header } from "../../shared/header/components/header";
 import styles from '../../styles/Post.module.css';
-import { Sections } from "../../components/molecules/sections";
 
 const prisma = new PrismaClient();
 
@@ -70,7 +68,6 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
 };
 
 export default function Post({ post }: Props) {
-    const { data: session } = useSession();
     const [formattedDate, setFormattedDate] = useState("");
 
     useEffect(() => {
@@ -99,23 +96,6 @@ export default function Post({ post }: Props) {
                         <small>作成日: {formattedDate}</small>
                         <div>{post.content}</div>
                     </div>
-                    <div style={{ display: 'flex' }}>
-                        {/* 目次サイドバー */}
-                        <aside style={{ width: '200px', paddingRight: '2rem' }}>
-                            <Sections items={sections} />
-                        </aside>
-                        <main>
-                            <section id="introduction"><h2>はじめに</h2></section>
-                            <section id="usage"><h2>使い方</h2></section>
-                            <section id="pros-cons"><h2>メリット・デメリット</h2></section>
-                            <section id="summary"><h2>まとめ</h2></section>
-                        </main>
-                    </div>
-                    {session && (
-                        <button onClick={() => signOut({ callbackUrl: "/" })}>
-                            ログアウト
-                        </button>
-                    )}
                 </div>
             </div>
         </div>
