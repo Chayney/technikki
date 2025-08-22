@@ -15,6 +15,10 @@ export type MenuProps = {
     items: MenuItem[];
 };
 
+export type PostProps = {
+    label: string
+};
+
 export type LogoutProps = {
     label: string
 };

@@ -3,7 +3,7 @@ import { PrismaClient } from "../prisma/generated/prisma";
 import { GetStaticProps } from "next";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import styles from '../styles/Content.module.css';
+import styles from '../styles/list.module.css';
 import { Header } from "../shared/header/components/header";
 
 type Props = {

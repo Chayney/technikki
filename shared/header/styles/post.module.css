@@ -1,0 +1,11 @@
+.post {
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.post:hover {
+    opacity: 0.5;
+}

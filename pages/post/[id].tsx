@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Header } from '../../shared/header/components/header';
 import { PostContent } from '../../features/post/components/postContent';
-import styles from '../../styles/Post.module.css';
+import styles from '../../styles/article.module.css';
 import { getPostPaths } from '../../features/post/api/getPostPaths';
 import { getPostById } from '../../features/post/api/getPostById';
 import { Props, Params } from '../../features/post/types/post';

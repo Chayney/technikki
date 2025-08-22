@@ -3,6 +3,7 @@ import { Logo } from './logo';
 import { Logout } from './logout';
 import { useHeader } from '../hooks/useHeader';
 import styles from '../styles/header.module.css';
+import { Post } from './post';
 
 export const Header = () => {
     const { isLoggedIn } = useHeader();
@@ -28,7 +29,12 @@ export const Header = () => {
             </div>
             <div className={styles.nav}>
                 <Menu items={menuItems} />
-                {isLoggedIn && <Logout label="ログアウト" />}
+                {isLoggedIn && (
+                    <div>
+                        <Post label="記事投稿" />
+                        <Logout label="ログアウト" />
+                    </div>
+                )}
             </div>
         </header>
     );
